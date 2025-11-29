@@ -224,8 +224,8 @@ app.get("/admin", (req, res) => {
 // });
 
 // ===== START SERVER =====
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-  console.log(`\n🚀 Server running at http://localhost:${PORT}`);
-  console.log(`🛠 Admin panel: http://localhost:${PORT}/admin\n`);
+  console.log(`Server running on port ${PORT}`);
 });
+
