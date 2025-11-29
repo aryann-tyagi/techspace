@@ -9,6 +9,26 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 const DATA_FILE = path.join(__dirname, "winners.json");
+const ADMIN_USER = process.env.ADMIN_USER || "techspace";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "veryhard69";
+
+function adminAuth(req, res, next) {
+  const authHeader = req.headers.authorization || "";
+  const [type, value] = authHeader.split(" ");
+
+  if (type !== "Basic" || !value) {
+    res.set("WWW-Authenticate", 'Basic realm="TechSpace Admin"');
+    return res.sendStatus(401);
+  }
+
+  const [user, pass] = Buffer.from(value, "base64").toString().split(":");
+  if (user === ADMIN_USER && pass === ADMIN_PASSWORD) {
+    return next();
+  }
+
+  res.set("WWW-Authenticate", 'Basic realm="TechSpace Admin"');
+  return res.sendStatus(401);
+}
 
 // ===== HELPERS: LOAD & SAVE WINNERS =====
 let winners = [];
@@ -206,9 +226,13 @@ app.post("/api/admin/winners", (req, res) => {
 });
 
 // Serve admin page
-app.get("/admin", (req, res) => {
+app.get("/admin", adminAuth, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "admin.html"));
 });
+
+// protect all admin APIs
+app.use("/api/admin", adminAuth);
+
 
 // // ===== CHAT (Socket.IO) =====
 // io.on("connection", (socket) => {
