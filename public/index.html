@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>University Club Website</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="header">
+  <div class="container header-logo">
+    <img src="assets/logo.png" alt="TechSpace Logo" class="club-logo" />
+    <div>
+      <h1 class="club-title">TechSpace</h1>
+      <p class="club-subtitle">Create • Code • Connect</p>
+    </div>
+  </div>
+</header>
+
+
+<main class="container">
+  <section class="card" id="announcementCard" style="display:none;">
+  <h2>📢 Announcement</h2>
+  <p id="announcementText"></p>
+  </section>
+
+  <!-- WORKSHOPS (GOOGLE FORMS) -->
+  <section class="card card-animated">
+    <h2>Upcoming Workshops</h2>
+    <p class="hint">Click on a workshop to register via Google Forms.</p>
+    <div id="workshopsList" class="workshops-grid"></div>
+  </section>
+
+  <!-- WINNERS -->
+  <section class="card card-animated">
+    <h2>Top Performers</h2>
+    <p class="hint">Top 3 from each workshop. 🥇🥈🥉</p>
+    <div id="winnersList"></div>
+  </section>
+
+  <!-- CERTIFICATE DOWNLOAD -->
+  <section class="card card-animated">
+    <h2>Download Certificate</h2>
+    <p class="hint">Use your Registration Number + secret Certificate Code shared privately.</p>
+    <form id="certificateForm" class="form-inline">
+      <input type="text" id="certRegNo" placeholder="Registration Number" required />
+      <input type="text" id="certificateCode" placeholder="Certificate Code" required />
+      <button class="btn">Verify & Download</button>
+    </form>
+    <p id="certificateMessage" class="status-text"></p>
+  </section>
+
+  <!-- CHAT
+  <section class="card card-animated">
+    <h2>Student Chat</h2>
+    <p class="hint">Discuss workshops, ideas & announcements. Be respectful. 🙂</p>
+    <div class="chat-box">
+      <div id="chatMessages" class="messages"></div>
+      <form id="chatForm" class="chat-form">
+        <input type="text" id="chatName" placeholder="Your Name" required />
+        <input type="text" id="chatInput" placeholder="Type a message..." required />
+        <button class="btn btn-small">Send</button>
+      </form>
+    </div>
+  </section> -->
+
+</main>
+
+<footer class="footer">
+  © <span id="year"></span> TechSpace Club — All Rights Reserved
+</footer>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

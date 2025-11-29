@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel - University Club</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .admin-wrap {
+      max-width: 960px;
+      margin: 1.5rem auto 2.5rem auto;
+    }
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 0.6rem;
+    }
+    .admin-table th,
+    .admin-table td {
+      border: 1px solid #1f2937;
+      padding: 0.35rem 0.45rem;
+      text-align: left;
+    }
+    .admin-table th {
+      background: rgba(15, 23, 42, 0.9);
+    }
+    .admin-tag {
+      font-size: 0.8rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.6);
+    }
+    .admin-form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.6rem;
+      margin: 0.6rem 0;
+    }
+    .admin-form-grid label {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-left: 0.3rem;
+    }
+    .admin-status {
+      margin-top: 0.4rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <h1 class="logo-text">Admin Panel</h1>
+    <p>Manage winners & certificate codes</p>
+  </div>
+</header>
+
+<main class="admin-wrap">
+
+    <section class="card">
+  <h2>Update Announcement</h2>
+  <form id="announcementForm">
+    <input type="text" id="announcementInput" placeholder="Enter announcement" required />
+    <button class="btn" type="submit">Save</button>
+  </form>
+  <p id="announcementStatus"></p>
+</section>
+
+  <section class="card card-animated">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;">
+      <h2>Existing Winners</h2>
+      <span class="admin-tag">In-memory only (demo)</span>
+    </div>
+    <table class="admin-table" id="winnersTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Workshop ID</th>
+          <th>Workshop Name</th>
+          <th>Pos</th>
+          <th>Name</th>
+          <th>Reg No</th>
+          <th>Code</th>
+          <th>File</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section class="card card-animated">
+    <h2>Add Winner (Auto Code)</h2>
+    <p class="hint">Fill the details and we’ll generate a unique certificate code automatically.</p>
+
+    <form id="adminAddForm">
+      <div class="admin-form-grid">
+        <div>
+          <label for="aWorkshopId">Workshop ID (e.g. ws1)</label>
+          <input id="aWorkshopId" required />
+        </div>
+        <div>
+          <label for="aWorkshopName">Workshop Name</label>
+          <input id="aWorkshopName" required />
+        </div>
+        <div>
+          <label for="aPosition">Position (1/2/3)</label>
+          <input id="aPosition" type="number" min="1" max="3" required />
+        </div>
+        <div>
+          <label for="aName">Winner Name</label>
+          <input id="aName" required />
+        </div>
+        <div>
+          <label for="aRegNo">Registration No</label>
+          <input id="aRegNo" required />
+        </div>
+        <div>
+          <label for="aFile">Certificate File Name (in /certificates)</label>
+          <input id="aFile" placeholder="e.g. ws1_1st.pdf" required />
+        </div>
+      </div>
+      <button class="btn">Add Winner</button>
+    </form>
+    <p id="adminStatus" class="admin-status"></p>
+  </section>
+
+  <section class="card card-animated">
+    <h2>Notes</h2>
+    <ul style="font-size:0.9rem;color:#9ca3af;">
+      <li>Data is stored in memory only (server restart = reset).</li>
+      <li>Make sure the certificate file exists in the <code>/certificates</code> folder.</li>
+      <li>Share the generated certificate code privately with the winner.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="footer">
+  © <span id="year"></span> University Club Admin
+</footer>
+
+<script src="admin.js"></script>
+</body>
+</html>
